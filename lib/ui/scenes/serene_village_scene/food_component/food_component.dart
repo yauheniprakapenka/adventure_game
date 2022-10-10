@@ -1,14 +1,13 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
-import '../george_game.dart';
+import '../../../../geogre_game/george_game.dart';
 
-class BakedGoodComponent extends SpriteComponent
+class FoodComponent extends SpriteComponent
     with GestureHitboxes, CollisionCallbacks, HasGameRef<GeorgeGame> {
-
   final String name;
 
-  BakedGoodComponent({required this.name}) {
+  FoodComponent({required this.name}) {
     add(RectangleHitbox());
   }
 

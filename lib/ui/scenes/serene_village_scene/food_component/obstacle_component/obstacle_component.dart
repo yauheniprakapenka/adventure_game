@@ -1,8 +1,8 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
-import '../george_game.dart';
-import '../../ui/scenes/serene_village_scene/characters/george/george_component.dart';
+import '../../../../../geogre_game/george_game.dart';
+import '../george_component/george_component.dart';
 
 class ObstacleComponent extends PositionComponent
     with GestureHitboxes, CollisionCallbacks, HasGameRef<GeorgeGame> {
@@ -18,13 +18,10 @@ class ObstacleComponent extends PositionComponent
 
   @override
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
-    super.onCollisionStart(intersectionPoints, other);
-    print('On obstacle collision start');
-
     if (other is GeorgeComponent) {
       gameRef.collisionDirection = gameRef.georgeDirection;
-      print('collision with obstacle in direction: ${gameRef.collisionDirection}');
     }
+    super.onCollisionStart(intersectionPoints, other);
   }
 
   @override

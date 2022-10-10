@@ -1,9 +1,8 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart';
 
-import '../george_game.dart';
-import '../../ui/scenes/serene_village_scene/characters/george/george_component.dart';
+import '../../../../../geogre_game/george_game.dart';
+import '../george_component/george_component.dart';
 
 class FriendComponent extends PositionComponent
     with GestureHitboxes, CollisionCallbacks, HasGameRef<GeorgeGame> {
@@ -24,20 +23,19 @@ class FriendComponent extends PositionComponent
     if (other is GeorgeComponent) {
       String dialogMessage;
       if (gameRef.pieNumber > 0) {
-        dialogMessage = 'Thanks for a pie!';
+        dialogMessage = '$name: Thanks for a pie!';
         gameRef.pieNumber--;
+        gameRef.friendNumber++;
       } else {
-        dialogMessage = 'Can you find a pie?';
+        dialogMessage = '$name: Can you find a pie?';
       }
       gameRef.dialogMessage = dialogMessage;
       gameRef.showDialog = true;
-      gameRef.friendNumber++;
-
-      if (gameRef.maxFriends <= gameRef.friendNumber) {
+      final bool isLevelFinished = gameRef.maxFriends <= gameRef.friendNumber;
+      if (isLevelFinished) {
         gameRef.sceneNumber++;
         gameRef.newScene();
       }
-
       gameRef.refreshWidget();
     }
     super.onCollisionStart(intersectionPoints, other);

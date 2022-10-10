@@ -11,18 +11,16 @@ import 'package:tiled/tiled.dart';
 import '../core_ui/app_audio.dart';
 import '../core_ui/app_tiled_components.dart';
 import '../core_ui/design/movement_direction.dart';
-import '../ui/scenes/serene_village_scene/characters/george/george_component.dart';
+import '../ui/scenes/serene_village_scene/food_component/george_component/george_component.dart';
 import 'loaders/add_baked_goods.dart';
-import 'loaders/load_friends.dart';
-import 'loaders/load_obstacles.dart';
+import '../ui/scenes/serene_village_scene/food_component/friend_component/load_friend_components.dart';
+import '../ui/scenes/serene_village_scene/food_component/obstacle_component/load_obstacle_components.dart';
 import 'overlays/overlay_controller.dart';
 
 const int kNoCollision = -1;
 
-
-
 class GeorgeGame extends FlameGame with TapDetector, HasCollisionDetection {
-  late  GeorgeComponent _george;
+  late GeorgeComponent _george;
 
   String dialogMessage = 'My first message';
 
@@ -31,8 +29,8 @@ class GeorgeGame extends FlameGame with TapDetector, HasCollisionDetection {
   /// if collision is -1 that is no collision.
   int collisionDirection = kNoCollision;
 
-  late  double mapWidth;
-  late  double mapHeight;
+  late double mapWidth;
+  late double mapHeight;
 
   static const double _tileSize = 16.0;
 
@@ -47,7 +45,7 @@ class GeorgeGame extends FlameGame with TapDetector, HasCollisionDetection {
 
   late TiledComponent homeMap;
 
-  List<Component> componentList = [];
+  List<Component> components = [];
 
   @override
   Future<void> onLoad() async {
@@ -62,10 +60,10 @@ class GeorgeGame extends FlameGame with TapDetector, HasCollisionDetection {
 
     await add(homeMap);
     await addBakedGoods(homeMap, this);
-    await loadFriends(homeMap, this);
-    await loadObstacles(homeMap, this);
+    await loadFriendComponents(homeMap, this);
+    await loadObstacleComponents(homeMap, this);
 
-    componentList.forEach((component) async {
+    components.forEach((component) async {
       await add(component);
     });
 
@@ -105,25 +103,23 @@ class GeorgeGame extends FlameGame with TapDetector, HasCollisionDetection {
     print('change to a new scene');
 
     remove(homeMap);
-    removeAll(componentList);
-    componentList.clear();
+    removeAll(components);
+    components.clear();
     showDialog = false;
     remove(_george);
     _george = GeorgeComponent()..position = Vector2(300, 128);
-   
 
     if (sceneNumber == 2) {
       print('moving to map 2');
     }
 
-    
     homeMap = await TiledComponent.load(AppTiledComponents.office, Vector2.all(_tileSize));
     await add(homeMap);
 
     mapWidth = homeMap.tileMap.map.width * _tileSize;
     mapHeight = homeMap.tileMap.map.height * _tileSize;
 
- await add(_george);
+    await add(_george);
     camera.followComponent(_george, worldBounds: Rect.fromLTWH(0, 0, mapWidth, mapHeight));
   }
 }

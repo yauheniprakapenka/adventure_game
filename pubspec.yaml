@@ -20,7 +20,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.1
-  dart_code_metrics: ^4.20.0
+  dart_code_metrics: ^4.21.0
 
 flutter:
   uses-material-design: true
@@ -31,6 +31,10 @@ flutter:
     - assets/tiles/new_office/
     - assets/images/new_office/tilesets/
     - assets/images/sprite_sheets/
+
+    # serenety_village
+    - assets/images/serenety_village/
+    - assets/tiles/serenety_village/
   
   fonts:
     - family: vt323
