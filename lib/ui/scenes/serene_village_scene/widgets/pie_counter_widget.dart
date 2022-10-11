@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../design/serenety_village_colors.dart';
 import '../../../../core_ui/design/app_text_style.dart';
+import '../design/serenety_village_colors.dart';
 import '../game/serenety_village_game.dart';
 
 class PieCounterWidget extends StatelessWidget {
@@ -22,7 +22,7 @@ class PieCounterWidget extends StatelessWidget {
         children: [
           Image.asset('assets/images/serenety_village/apple_pie.png'),
           Text(
-            'Pies: ${game.pieNumber}',
+            'Pies: ${game.state.piesCount}',
             style: AppTextStyle.h3,
           ),
         ],

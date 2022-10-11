@@ -15,12 +15,15 @@ import '../components/friend_component/load_friend_components.dart';
 import '../components/george_component/george_component.dart';
 import '../components/obstacle_component/load_obstacle_components.dart';
 import '../design/serenety_village_audio.dart';
+import '../states/serenety_village_state.dart';
 import '../tiled_maps/serene_village_tiled_map/serene_village_tiled_map.dart';
 
 const String kOverlayController = 'ButtonController';
 
 class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetection {
+  final SerenetyVillageState state = SerenetyVillageState();
   late GeorgeComponent _george;
+  static const double _tileSize = SereneVillageTiledMap.tileSize;
 
   String dialogMessage = 'My first message';
 
@@ -31,11 +34,10 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
   late double mapWidth;
   late double mapHeight;
 
-  static const double _tileSize = 16.0;
 
-  int friendNumber = 0;
-  int pieNumber = 0;
-  int maxFriends = 0;
+  
+  
+ 
   int sceneNumber = 1;
 
   bool showDialog = true;

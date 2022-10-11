@@ -19,7 +19,7 @@ class FoodComponent extends SpriteComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    gameRef.pieNumber++;
+    gameRef.state.increasePies();
     gameRef.refreshWidget();
     gameRef.click2.start();
     removeFromParent();

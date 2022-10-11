@@ -1,10 +1,9 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-
 import 'package:flame/sprite.dart';
 
-import '../../../../../core_ui/movement_direction.dart';
 import '../../../../../core_ui/design/screen.dart';
+import '../../../../../core_ui/movement_direction.dart';
 import '../../game/serenety_village_game.dart';
 import 'george_sprite_sheet.dart';
 

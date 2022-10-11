@@ -12,7 +12,6 @@ Future<void> loadFriendComponents(TiledComponent homeMap, SerenetyVillageGame ga
   );
   if (friendsObjectGroup != null) {
     for (final object in friendsObjectGroup.objects) {
-      game.maxFriends++;
       final FriendComponent friendComponent = FriendComponent(name: object.name)
         ..position = Vector2(object.x, object.y)
         ..width = object.width

@@ -1,8 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
-import '../design/serenety_village_colors.dart';
 import '../../../../core_ui/design/app_text_style.dart';
+import '../design/serenety_village_colors.dart';
 import '../game/serenety_village_game.dart';
 
 class DialogWidget extends StatelessWidget {
