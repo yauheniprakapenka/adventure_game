@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 
-import '../../core_ui/app_colors.dart';
-import '../../core_ui/app_text_style.dart';
-import '../george_game.dart';
+import '../design/serenety_village_colors.dart';
+import '../../../../core_ui/design/app_text_style.dart';
+import '../game/serenety_village_game.dart';
 
-class PiesScoreWidget extends StatelessWidget {
-  const PiesScoreWidget({
+class PieCounterWidget extends StatelessWidget {
+  const PieCounterWidget({
     Key? key,
     required this.game,
   }) : super(key: key);
 
-  final GeorgeGame game;
+  final SerenetyVillageGame game;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8),
-      color: AppColors.overlayBackground,
+      color: SerenetyVillageColors.overlayBackground,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset('assets/images/apple_pie2.png'),
+          Image.asset('assets/images/serenety_village/apple_pie.png'),
           Text(
             'Pies: ${game.pieNumber}',
             style: AppTextStyle.h3,

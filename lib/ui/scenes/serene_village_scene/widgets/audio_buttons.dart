@@ -1,16 +1,16 @@
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 
-import '../../core_ui/app_colors.dart';
+import '../design/serenety_village_colors.dart';
 
-class AudioOverlay extends StatelessWidget {
-  const AudioOverlay({Key? key}) : super(key: key);
+class AudioButtons extends StatelessWidget {
+  const AudioButtons({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8),
-      color: AppColors.overlayBackground,
+      color: SerenetyVillageColors.overlayBackground,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -1,10 +1,10 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
-import '../../../../geogre_game/george_game.dart';
+import '../../game/serenety_village_game.dart';
 
 class FoodComponent extends SpriteComponent
-    with GestureHitboxes, CollisionCallbacks, HasGameRef<GeorgeGame> {
+    with GestureHitboxes, CollisionCallbacks, HasGameRef<SerenetyVillageGame> {
   final String name;
 
   FoodComponent({required this.name}) {

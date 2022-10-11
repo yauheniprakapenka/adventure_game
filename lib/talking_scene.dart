@@ -2,7 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/image_composition.dart';
 
-import '../core_ui/design/app_images.dart';
+import 'core_ui/design/app_images.dart';
 
 class TalkingScene extends FlameGame {
   TextPaint dialogTextPaint = TextPaint();

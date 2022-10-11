@@ -2,8 +2,8 @@ import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
-import 'geogre_game/george_game.dart';
-import 'geogre_game/overlays/overlay_controller.dart';
+import 'ui/scenes/serene_village_scene/game/serenety_village_game.dart';
+import 'ui/scenes/serene_village_scene/widgets/scene_controller_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,10 +12,10 @@ void main() async {
     MaterialApp(
       home: Scaffold(
         body: GameWidget(
-          game: GeorgeGame(),
+          game: SerenetyVillageGame(),
           overlayBuilderMap: {
-            kOverlayController: (BuildContext context, GeorgeGame game) {
-              return OverlayController(
+            kOverlayController: (BuildContext context, SerenetyVillageGame game) {
+              return SceneControllerWidget(
                 game: game,
               );
             },

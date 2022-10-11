@@ -3,13 +3,13 @@ import 'package:flame/components.dart';
 
 import 'package:flame/sprite.dart';
 
-import '../../../../../core_ui/design/movement_direction.dart';
+import '../../../../../core_ui/movement_direction.dart';
 import '../../../../../core_ui/design/screen.dart';
-import '../../../../../geogre_game/george_game.dart';
+import '../../game/serenety_village_game.dart';
 import 'george_sprite_sheet.dart';
 
 class GeorgeComponent extends SpriteAnimationComponent
-    with GestureHitboxes, CollisionCallbacks, HasGameRef<GeorgeGame> {
+    with GestureHitboxes, CollisionCallbacks, HasGameRef<SerenetyVillageGame> {
   late final SpriteAnimation _goDownAnimation;
   late final SpriteAnimation _goLeftAnimation;
   late final SpriteAnimation _goRightAnimation;
@@ -48,34 +48,34 @@ class GeorgeComponent extends SpriteAnimationComponent
   void _updateMovement() {
     animation = _idleAnimation;
     switch (gameRef.georgeDirection) {
-      case directionDownIndex:
+      case kDirectionDownIndex:
         if (y < gameRef.mapHeight - height) {
-          if (gameRef.collisionDirection != directionDownIndex) {
+          if (gameRef.collisionDirection != kDirectionDownIndex) {
             y += _speed;
             animation = _goDownAnimation;
           }
         }
         break;
-      case directionLeftIndex:
+      case kDirectionLeftIndex:
         final bool notReachedLeftScreenEdge = x > startXPosition;
         if (notReachedLeftScreenEdge) {
-          if (gameRef.collisionDirection != directionLeftIndex) {
+          if (gameRef.collisionDirection != kDirectionLeftIndex) {
             animation = _goLeftAnimation;
             x -= _speed;
           }
         }
         break;
-      case directionUpIndex:
+      case kDirectionUpIndex:
         if (y > startYPosition) {
-          if (gameRef.collisionDirection != directionUpIndex) {
+          if (gameRef.collisionDirection != kDirectionUpIndex) {
             animation = _goUpAnimation;
             y -= _speed;
           }
         }
         break;
-      case directionRightIndex:
+      case kDirectionRightIndex:
         if (x < gameRef.mapWidth - width) {
-          if (gameRef.collisionDirection != directionRightIndex) {
+          if (gameRef.collisionDirection != kDirectionRightIndex) {
             animation = _goRightAnimation;
             x += _speed;
           }

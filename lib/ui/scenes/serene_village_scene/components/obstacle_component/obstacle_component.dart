@@ -1,11 +1,12 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
-import '../../../../../geogre_game/george_game.dart';
+import '../../../../../core_ui/movement_direction.dart';
+import '../../game/serenety_village_game.dart';
 import '../george_component/george_component.dart';
 
 class ObstacleComponent extends PositionComponent
-    with GestureHitboxes, CollisionCallbacks, HasGameRef<GeorgeGame> {
+    with GestureHitboxes, CollisionCallbacks, HasGameRef<SerenetyVillageGame> {
   ObstacleComponent() {
     add(RectangleHitbox());
   }

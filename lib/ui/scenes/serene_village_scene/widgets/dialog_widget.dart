@@ -1,20 +1,20 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
-import '../../core_ui/app_colors.dart';
-import '../../core_ui/app_text_style.dart';
-import '../george_game.dart';
+import '../design/serenety_village_colors.dart';
+import '../../../../core_ui/design/app_text_style.dart';
+import '../game/serenety_village_game.dart';
 
-class DialogOverlay extends StatelessWidget {
-  final GeorgeGame game;
-  const DialogOverlay({super.key, required this.game});
+class DialogWidget extends StatelessWidget {
+  final SerenetyVillageGame game;
+  const DialogWidget({super.key, required this.game});
 
   @override
   Widget build(BuildContext context) {
     return game.showDialog
         ? Container(
-            padding: EdgeInsets.all(8),
-            color: AppColors.overlayBackground,
+            padding: const EdgeInsets.all(8),
+            color: SerenetyVillageColors.overlayBackground,
             child: AnimatedTextKit(
               animatedTexts: [
                 TyperAnimatedText(

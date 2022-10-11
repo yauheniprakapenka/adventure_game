@@ -2,11 +2,12 @@ import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:tiled/tiled.dart';
 
-import '../../ui/scenes/serene_village_scene/tiled_maps/serene_village_tiled_map/serene_village_tiled_map.dart';
-import '../../ui/scenes/serene_village_scene/food_component/food_component.dart';
-import '../george_game.dart';
+import '../../game/serenety_village_game.dart';
+import '../../tiled_maps/serene_village_tiled_map/serene_village_tiled_map.dart';
+import 'class_to_image_path_extension.dart';
+import 'food_component.dart';
 
-Future<void> addBakedGoods(TiledComponent homeMap, GeorgeGame game) async {
+Future<void> loadFoodComponents(TiledComponent homeMap, SerenetyVillageGame game) async {
   final ObjectGroup? foodsObjectGroup = homeMap.tileMap.getLayer<ObjectGroup>(
     SereneVillageTiledMap.foodsGroupName,
   );
@@ -23,20 +24,7 @@ Future<void> addBakedGoods(TiledComponent homeMap, GeorgeGame game) async {
           ..width = object.width
           ..height = object.height;
         game.components.add(foodComponent);
-        ;
       }
-    }
-  }
-}
-
-extension ClassToImagePathExtension on String {
-  String classToImagePath() {
-    if (this == 'apple_pie_selection') {
-      return 'serenety_village/apple_pie.png';
-    } else if (this == 'choko_pie_selection') {
-      return 'serenety_village/choko_pie.png';
-    } else {
-      return '';
     }
   }
 }

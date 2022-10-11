@@ -8,25 +8,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiled/tiled.dart';
 
-import '../core_ui/app_audio.dart';
-import '../core_ui/app_tiled_components.dart';
-import '../core_ui/design/movement_direction.dart';
-import '../ui/scenes/serene_village_scene/food_component/george_component/george_component.dart';
-import 'loaders/add_baked_goods.dart';
-import '../ui/scenes/serene_village_scene/food_component/friend_component/load_friend_components.dart';
-import '../ui/scenes/serene_village_scene/food_component/obstacle_component/load_obstacle_components.dart';
-import 'overlays/overlay_controller.dart';
+import '../../../../core_ui/app_tiled_components.dart';
+import '../../../../core_ui/movement_direction.dart';
+import '../components/food_component/load_food_components.dart';
+import '../components/friend_component/load_friend_components.dart';
+import '../components/george_component/george_component.dart';
+import '../components/obstacle_component/load_obstacle_components.dart';
+import '../design/serenety_village_audio.dart';
+import '../tiled_maps/serene_village_tiled_map/serene_village_tiled_map.dart';
 
-const int kNoCollision = -1;
+const String kOverlayController = 'ButtonController';
 
-class GeorgeGame extends FlameGame with TapDetector, HasCollisionDetection {
+class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetection {
   late GeorgeComponent _george;
 
   String dialogMessage = 'My first message';
 
-  int georgeDirection = idleIndex;
+  int georgeDirection = kIdleIndex;
 
-  /// if collision is -1 that is no collision.
   int collisionDirection = kNoCollision;
 
   late double mapWidth;
@@ -51,15 +50,16 @@ class GeorgeGame extends FlameGame with TapDetector, HasCollisionDetection {
   Future<void> onLoad() async {
     await super.onLoad();
     FlameAudio.bgm.initialize();
-    await FlameAudio.bgm.play(AppAudio.background);
+    await FlameAudio.bgm.play(SerenetyVillageAudio.background);
     await FlameAudio.bgm.pause();
 
-    click2 = await AudioPool.create(AppAudio.click2, maxPlayers: 8);
+    click2 = await AudioPool.create(SerenetyVillageAudio.pickUpItem, maxPlayers: 8);
 
-    homeMap = await TiledComponent.load(AppTiledComponents.sereneVillage, Vector2.all(_tileSize));
+    homeMap = await TiledComponent.load(
+        SereneVillageTiledMap.sereneVillageTiledMapPath, Vector2.all(_tileSize));
 
     await add(homeMap);
-    await addBakedGoods(homeMap, this);
+    await loadFoodComponents(homeMap, this);
     await loadFriendComponents(homeMap, this);
     await loadObstacleComponents(homeMap, this);
 
