@@ -22,7 +22,7 @@ class SceneControllerWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const AudioButtons(),
+          AudioButtons(game: game),
           Row(
             children: [
               PieCounterWidget(game: game),

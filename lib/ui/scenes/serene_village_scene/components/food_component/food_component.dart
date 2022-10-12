@@ -21,7 +21,7 @@ class FoodComponent extends SpriteComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     gameRef.state.increasePies();
     gameRef.refreshWidget();
-    gameRef.click2.start();
+    gameRef.audioController.playPickUpItem();
     removeFromParent();
     super.onCollision(intersectionPoints, other);
   }

@@ -1,4 +1,4 @@
-class SerenetyVillageState {
+class SerenetyVillageStateController {
   int _piesCounter = 0;
   int get piesCount => _piesCounter;
   void increasePies() => _piesCounter++;

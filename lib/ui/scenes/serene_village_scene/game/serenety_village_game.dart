@@ -10,55 +10,50 @@ import 'package:tiled/tiled.dart';
 
 import '../../../../core_ui/app_tiled_components.dart';
 import '../../../../core_ui/movement_direction.dart';
+import '../../../../core_ui/screen.dart';
+import '../controllers/serenety_village_audio_controller.dart';
 import '../components/food_component/load_food_components.dart';
 import '../components/friend_component/load_friend_components.dart';
 import '../components/george_component/george_component.dart';
 import '../components/obstacle_component/load_obstacle_components.dart';
-import '../design/serenety_village_audio.dart';
-import '../states/serenety_village_state.dart';
+
+import '../controllers/serenety_village_state_controller.dart';
 import '../tiled_maps/serene_village_tiled_map/serene_village_tiled_map.dart';
 
 const String kOverlayController = 'ButtonController';
 
 class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetection {
-  final SerenetyVillageState state = SerenetyVillageState();
+  final SerenetyVillageStateController state = SerenetyVillageStateController();
+  final SerenetyVillageAudioController audioController = SerenetyVillageAudioController();
+
   late GeorgeComponent _george;
   static const double _tileSize = SereneVillageTiledMap.tileSize;
-
   String dialogMessage = 'My first message';
-
   int georgeDirection = kIdleIndex;
-
   int collisionDirection = kNoCollision;
-
   late double mapWidth;
   late double mapHeight;
-
-
-  
-  
- 
   int sceneNumber = 1;
-
   bool showDialog = true;
-
-  late AudioPool click2;
-
+  // late AudioPool click2;
   late TiledComponent homeMap;
-
   List<Component> components = [];
+
+  late final Rect worldBounds;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    FlameAudio.bgm.initialize();
-    await FlameAudio.bgm.play(SerenetyVillageAudio.background);
-    await FlameAudio.bgm.pause();
-
-    click2 = await AudioPool.create(SerenetyVillageAudio.pickUpItem, maxPlayers: 8);
+    audioController.initialize();
+    audioController.playBackground();
 
     homeMap = await TiledComponent.load(
         SereneVillageTiledMap.sereneVillageTiledMapPath, Vector2.all(_tileSize));
+
+    final TiledMap tiledMap = homeMap.tileMap.map;
+    mapWidth = tiledMap.width * _tileSize;
+    mapHeight = tiledMap.height * _tileSize;
+    worldBounds = Rect.fromLTRB(kStartXPosition, kStartYPosition, mapWidth, mapHeight);
 
     await add(homeMap);
     await loadFoodComponents(homeMap, this);
@@ -69,25 +64,13 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
       await add(component);
     });
 
-    final TiledMap tiledMap = homeMap.tileMap.map;
-    mapWidth = tiledMap.width * _tileSize;
-    mapHeight = tiledMap.height * _tileSize;
-
     _george = GeorgeComponent()
-      ..position = Vector2(250, 140)
+      ..position = Vector2(250, 540)
       ..anchor = Anchor.center;
 
     await add(_george);
 
-    camera.followComponent(
-      _george,
-      worldBounds: Rect.fromLTRB(
-        0,
-        0,
-        mapWidth,
-        mapHeight,
-      ),
-    );
+    camera.followComponent(_george, worldBounds: worldBounds);
 
     overlays.add(kOverlayController);
   }
@@ -109,7 +92,7 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
     components.clear();
     showDialog = false;
     remove(_george);
-    _george = GeorgeComponent()..position = Vector2(300, 128);
+    _george = GeorgeComponent()..position = Vector2(300, 528);
 
     if (sceneNumber == 2) {
       print('moving to map 2');
@@ -122,6 +105,6 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
     mapHeight = homeMap.tileMap.map.height * _tileSize;
 
     await add(_george);
-    camera.followComponent(_george, worldBounds: Rect.fromLTWH(0, 0, mapWidth, mapHeight));
+    camera.followComponent(_george, worldBounds: worldBounds);
   }
 }
