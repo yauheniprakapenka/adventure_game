@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="88" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="28">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="88" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="29">
  <tileset firstgid="1" name="choko_pie" tilewidth="16" tileheight="15" tilecount="1" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -23,6 +23,9 @@
  <objectgroup id="2" name="friends">
   <object id="1" name="john" class="john_selection" x="111.991" y="427.62" width="31.6889" height="44.8326"/>
   <object id="7" name="peter" class="peter_selection" x="288.465" y="64.2913" width="33.1608" height="41.6201"/>
+ </objectgroup>
+ <objectgroup id="8" name="beach">
+  <object id="28" name="central_beach" class="central_beach_selection" x="583.924" y="401.298" width="206.656" height="142.977"/>
  </objectgroup>
  <objectgroup id="3" name="foods">
   <object id="8" class="apple_pie_selection" x="1151.93" y="95.2569" width="15.74" height="16.32"/>

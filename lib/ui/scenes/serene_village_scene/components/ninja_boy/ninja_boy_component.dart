@@ -35,6 +35,12 @@ class NinjaBoyComponent extends SpriteAnimationComponent
     super.onCollisionStart(intersectionPoints, other);
   }
 
+  @override
+  void update(double dt) {
+    super.update(dt);
+    // x+=1;
+  }
+
   Future<void> _createAnimation() async {
     final SpriteSheet spriteSheet = SpriteSheet(
       image: await gameRef.images.load(NinjaBoySpriteSheet.imagePath),

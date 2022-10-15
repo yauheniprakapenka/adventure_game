@@ -9,6 +9,7 @@ import 'package:tiled/tiled.dart';
 import '../../../../core_ui/app_tiled_components.dart';
 import '../../../../core_ui/movement_direction.dart';
 import '../../../../core_ui/screen.dart';
+import '../components/beach_component/load_beach_components.dart';
 import '../components/food_component/load_food_components.dart';
 import '../components/friend_component/load_friend_components.dart';
 import '../components/george_component/george_component.dart';
@@ -66,7 +67,8 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
     await add(homeMap);
     await loadFoodComponents(homeMap, this);
     await loadFriendComponents(homeMap, this);
-    await loadObstacleComponents(homeMap, this);
+    await loadObstacleComponents(homeMap: homeMap, game: this);
+    await loadBeachComponents(homeMap: homeMap, game: this);
 
     components.forEach((component) async {
       await add(component);
