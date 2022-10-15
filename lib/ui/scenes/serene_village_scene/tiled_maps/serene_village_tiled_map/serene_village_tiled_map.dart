@@ -8,6 +8,7 @@ class SereneVillageTiledMap {
 
   static const String applePieSelectionClass = 'apple_pie_selection';
   static const String chokoPieSelectionClass = 'choko_pie_selection';
+  static const String centralBeachSelection = 'central_beach_selection';
 
   static const double tileSize = 16.0;
 }

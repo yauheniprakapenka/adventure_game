@@ -9,6 +9,7 @@ import 'package:tiled/tiled.dart';
 import '../../../../core_ui/app_tiled_components.dart';
 import '../../../../core_ui/movement_direction.dart';
 import '../../../../core_ui/screen.dart';
+import '../components/beach_component/beach_component.dart';
 import '../components/beach_component/load_beach_components.dart';
 import '../components/food_component/load_food_components.dart';
 import '../components/friend_component/load_friend_components.dart';
@@ -42,6 +43,8 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
   final Vector2 _georgeStartPosition = Vector2(250, 540);
   final Vector2 _ningaBoyStartPosition = Vector2(700, 440);
 
+  late final Rect centralBeachSelection;
+
   void showMessage(String message) {
     dialogMessage = message;
     isShowDialog = true;
@@ -68,7 +71,19 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
     await loadFoodComponents(homeMap, this);
     await loadFriendComponents(homeMap, this);
     await loadObstacleComponents(homeMap: homeMap, game: this);
-    await loadBeachComponents(homeMap: homeMap, game: this);
+
+    final List<BeachComponent> beachComponents = await loadBeachComponents(homeMap: homeMap);
+    beachComponents.forEach((BeachComponent component) async {
+      if (component.objectName == SereneVillageTiledMap.centralBeachSelection) {
+        centralBeachSelection = Rect.fromLTWH(
+          component.position[0],
+          component.position[1],
+          component.size[0],
+          component.size[1],
+        );
+        await add(component);
+      }
+    });
 
     components.forEach((component) async {
       await add(component);

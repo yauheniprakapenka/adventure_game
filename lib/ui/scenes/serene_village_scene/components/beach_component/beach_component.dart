@@ -2,11 +2,13 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
 import '../../game/serenety_village_game.dart';
-import '../george_component/george_component.dart';
+import '../ninja_boy/ninja_boy_component.dart';
 
 class BeachComponent extends PositionComponent
     with GestureHitboxes, CollisionCallbacks, HasGameRef<SerenetyVillageGame> {
-  BeachComponent() {
+  final String objectName;
+
+  BeachComponent({required this.objectName}) {
     add(RectangleHitbox());
   }
 
@@ -18,7 +20,7 @@ class BeachComponent extends PositionComponent
 
   @override
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (other is GeorgeComponent) {
+    if (other is NinjaBoyComponent) {
       print('пляж начался');
     }
     super.onCollisionStart(intersectionPoints, other);
