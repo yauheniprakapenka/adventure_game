@@ -5,7 +5,7 @@ class GeorgeSpriteSheet {
   static const int spritesInRow = 4;
 
   static const int goDownAnimationRowIndex = 0;
-  static const int goLeftAnimationRRowIndex = 1;
-  static const int goUpAnimationRRowIndex = 2;
-  static const int goRightAnimationRRowIndex = 3;
+  static const int goLeftAnimationRowIndex = 1;
+  static const int goUpAnimationRowIndex = 2;
+  static const int goRightAnimationRowIndex = 3;
 }

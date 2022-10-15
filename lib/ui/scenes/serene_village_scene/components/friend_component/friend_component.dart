@@ -21,17 +21,17 @@ class FriendComponent extends PositionComponent
   @override
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is GeorgeComponent) {
-      String dialogMessage;
-      if (gameRef.state.piesCount > 0) {
-        dialogMessage = '$name: Thanks for a pie!';
-        gameRef.state.decreasePies();
-        gameRef.state.increaseFriends();
+      String message;
+      if (gameRef.stateController.piesCount > 0) {
+        message = '$name: Thanks for a pie!';
+        gameRef.stateController.decreasePies();
+        gameRef.stateController.increaseFriends();
       } else {
-        dialogMessage = '$name: Can you find a pie?';
+        message = '$name: Can you find a pie?';
       }
-      gameRef.dialogMessage = dialogMessage;
-      gameRef.showDialog = true;
-      final bool isLevelFinished = gameRef.state.isMaxFriensNumberReached;
+      gameRef.showMessage(message);
+
+      final bool isLevelFinished = gameRef.stateController.isMaxFriensNumberReached;
       if (isLevelFinished) {
         gameRef.sceneNumber++;
         gameRef.newScene();

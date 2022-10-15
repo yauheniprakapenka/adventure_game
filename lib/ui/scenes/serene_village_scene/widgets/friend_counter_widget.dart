@@ -20,7 +20,7 @@ class FriendCounterWidget extends StatelessWidget {
         children: [
           Image.asset(SerenetyVillageImages.face),
           Text(
-            'Friends: ${game.state.friendsCount}',
+            'Friends: ${game.stateController.friendsCount}',
             style: AppTextStyle.h3,
           ),
         ],

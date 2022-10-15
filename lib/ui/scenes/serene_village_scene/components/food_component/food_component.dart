@@ -5,9 +5,7 @@ import '../../game/serenety_village_game.dart';
 
 class FoodComponent extends SpriteComponent
     with GestureHitboxes, CollisionCallbacks, HasGameRef<SerenetyVillageGame> {
-  final String name;
-
-  FoodComponent({required this.name}) {
+  FoodComponent() {
     add(RectangleHitbox());
   }
 
@@ -19,10 +17,10 @@ class FoodComponent extends SpriteComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    gameRef.state.increasePies();
-    gameRef.refreshWidget();
+    gameRef.stateController.increasePies();
     gameRef.audioController.playPickUpItem();
     removeFromParent();
+    gameRef.refreshWidget();
     super.onCollision(intersectionPoints, other);
   }
 }

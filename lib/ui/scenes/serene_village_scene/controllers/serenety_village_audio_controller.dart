@@ -15,16 +15,20 @@ class SerenetyVillageAudioController {
     return FlameAudio.bgm.isPlaying;
   }
 
-  void playBackground() {
-    FlameAudio.bgm.play(_background);
+  Future<void> playBackground() async {
+    await FlameAudio.bgm.play(_background);
   }
 
-  void pauseBackground() {
-    FlameAudio.bgm.pause();
+  Future<void> pauseBackground() async {
+    await FlameAudio.bgm.pause();
   }
 
-  void resumeBackground() {
-    FlameAudio.bgm.resume();
+  Future<void>  resumeBackground() async {
+    await FlameAudio.bgm.resume();
+  }
+
+  Future<void> stopBackground() async {
+    await FlameAudio.bgm.stop();
   }
 
   Future<void> playPickUpItem() async {

@@ -22,7 +22,7 @@ class PieCounterWidget extends StatelessWidget {
         children: [
           Image.asset('assets/images/serenety_village/apple_pie.png'),
           Text(
-            'Pies: ${game.state.piesCount}',
+            'Pies: ${game.stateController.piesCount}',
             style: AppTextStyle.h3,
           ),
         ],

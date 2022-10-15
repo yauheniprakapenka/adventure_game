@@ -11,7 +11,7 @@ class DialogWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return game.showDialog
+    return game.isShowDialog
         ? Container(
             padding: const EdgeInsets.all(8),
             color: SerenetyVillageColors.overlayBackground,
@@ -25,7 +25,7 @@ class DialogWidget extends StatelessWidget {
               ],
               isRepeatingAnimation: false,
               onFinished: () {
-                game.showDialog = false;
+                game.isShowDialog = false;
                 game.refreshWidget();
               },
             ),

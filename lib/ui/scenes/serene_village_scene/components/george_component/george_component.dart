@@ -2,8 +2,8 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 
-import '../../../../../core_ui/screen.dart';
 import '../../../../../core_ui/movement_direction.dart';
+import '../../../../../core_ui/screen.dart';
 import '../../game/serenety_village_game.dart';
 import 'george_sprite_sheet.dart';
 
@@ -19,12 +19,15 @@ class GeorgeComponent extends SpriteAnimationComponent
   static const double _stepTime = 0.2;
   static const double _relationToSpriteSize = 0.7;
   static const int _desiredNumberOfSpritesInRowForIdleAnimation = 1;
+  static const double _sizeMultiplier = 1.2;
+
+  Vector2 get _componentSize => Vector2.all(GeorgeSpriteSheet.spriteSize) * _sizeMultiplier;
 
   GeorgeComponent() {
     add(
       RectangleHitbox.relative(
         Vector2.all(_relationToSpriteSize),
-        parentSize: Vector2.all(GeorgeSpriteSheet.spriteSize),
+        parentSize: _componentSize,
       ),
     );
   }
@@ -33,7 +36,8 @@ class GeorgeComponent extends SpriteAnimationComponent
   Future<void> onLoad() async {
     await _createAnimation();
     animation = _idleAnimation;
-    size = Vector2.all(GeorgeSpriteSheet.spriteSize);
+    size = _componentSize;
+    anchor = Anchor.center;
     debugMode = true;
     await super.onLoad();
   }
@@ -96,19 +100,19 @@ class GeorgeComponent extends SpriteAnimationComponent
     );
 
     _goLeftAnimation = spriteSheet.createAnimation(
-      row: GeorgeSpriteSheet.goLeftAnimationRRowIndex,
+      row: GeorgeSpriteSheet.goLeftAnimationRowIndex,
       stepTime: _stepTime,
       to: GeorgeSpriteSheet.spritesInRow,
     );
 
     _goUpAnimation = spriteSheet.createAnimation(
-      row: GeorgeSpriteSheet.goUpAnimationRRowIndex,
+      row: GeorgeSpriteSheet.goUpAnimationRowIndex,
       stepTime: _stepTime,
       to: GeorgeSpriteSheet.spritesInRow,
     );
 
     _goRightAnimation = spriteSheet.createAnimation(
-      row: GeorgeSpriteSheet.goRightAnimationRRowIndex,
+      row: GeorgeSpriteSheet.goRightAnimationRowIndex,
       stepTime: _stepTime,
       to: GeorgeSpriteSheet.spritesInRow,
     );

@@ -18,7 +18,7 @@ Future<void> loadFoodComponents(TiledComponent homeMap, SerenetyVillageGame game
         return;
       } else {
         final Sprite sprite = await game.loadSprite(imagePath);
-        final FoodComponent foodComponent = FoodComponent(name: object.name)
+        final FoodComponent foodComponent = FoodComponent()
           ..position = Vector2(object.x, object.y)
           ..sprite = sprite
           ..width = object.width
