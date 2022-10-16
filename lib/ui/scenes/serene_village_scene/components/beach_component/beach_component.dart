@@ -20,9 +20,7 @@ class BeachComponent extends PositionComponent
 
   @override
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (other is NinjaBoyComponent) {
-      print('пляж начался');
-    }
+    if (other is NinjaBoyComponent) {}
     super.onCollisionStart(intersectionPoints, other);
   }
 }

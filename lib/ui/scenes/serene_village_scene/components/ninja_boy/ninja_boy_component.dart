@@ -12,16 +12,16 @@ import 'ninja_boy_sprite_sheet.dart';
 
 class NinjaBoyComponent extends SpriteAnimationComponent
     with GestureHitboxes, CollisionCallbacks, HasGameRef<SerenetyVillageGame> {
+      
   late final SpriteAnimation _idleAnimation;
   late final SpriteAnimation _runAnimation;
 
   static const double _idleAnimationStepTime = 0.08;
   static const double _runAnimationStepTime = 0.08;
-
   static const double _idleSpriteSizeMultiplier = 0.13;
   static const double _runSpriteSizeMultiplier = 0.63;
-
-  static const int _movementSpeed = 3;
+  static const double _movementSpeed = 1.3;
+  static const double _centralBeachSelectionPadding = 32.0;
 
   int _movementDirection = kDirectionLeftIndex;
   final NinjaBoyIdleDirectionTimer _idleMovementTimer = NinjaBoyIdleDirectionTimer();
@@ -35,7 +35,7 @@ class NinjaBoyComponent extends SpriteAnimationComponent
     await _createAnimation();
     animation = _idleAnimation;
     anchor = Anchor.center;
-    // debugMode = true;
+    debugMode = true;
     flipHorizontally();
     await super.onLoad();
   }
@@ -91,7 +91,7 @@ class NinjaBoyComponent extends SpriteAnimationComponent
 
     if (_movementDirection == kDirectionRightIndex) {
       animation = _runAnimation;
-      if (x < gameRef.centralBeachSelection.right) {
+      if (x < gameRef.centralBeachSelection.right - _centralBeachSelectionPadding) {
         x += _movementSpeed;
       } else {
         _movementDirection = kDirectionIdleIndex;
@@ -104,7 +104,7 @@ class NinjaBoyComponent extends SpriteAnimationComponent
     if (_movementDirection == kDirectionLeftIndex) {
       animation = _runAnimation;
       size = NinjaBoyRunSpriteSheet.spriteSize * _runSpriteSizeMultiplier;
-      if (x > gameRef.centralBeachSelection.left) {
+      if (x > gameRef.centralBeachSelection.left + _centralBeachSelectionPadding) {
         x -= _movementSpeed;
       } else {
         flipHorizontally();

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiled/tiled.dart';
 
-import '../../../../core_ui/app_tiled_components.dart';
 import '../../../../core_ui/movement_direction.dart';
 import '../../../../core_ui/screen.dart';
 import '../components/beach_component/beach_component.dart';
@@ -32,7 +31,6 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
   int collisionDirection = kNoCollision;
   late double mapWidth;
   late double mapHeight;
-  int sceneNumber = 1;
   bool isShowDialog = true;
   String dialogMessage = 'My first message';
   late TiledComponent homeMap;
@@ -101,32 +99,11 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
 
   @override
   void onTapUp(TapUpInfo info) {
-    if (georgeDirection >= 4) {
-      georgeDirection = 0;
+    const int maxDirections = 4;
+    if (georgeDirection >= maxDirections) {
+      georgeDirection = kDirectionIdleIndex;
     } else {
       georgeDirection++;
     }
-  }
-
-  void newScene() async {
-    remove(homeMap);
-    removeAll(components);
-    components.clear();
-    isShowDialog = false;
-    remove(_george);
-    _george = GeorgeComponent()..position = Vector2(300, 528);
-
-    if (sceneNumber == 2) {
-      print('moving to map 2');
-    }
-
-    homeMap = await TiledComponent.load(AppTiledComponents.office, Vector2.all(_tileSize));
-    await add(homeMap);
-
-    mapWidth = homeMap.tileMap.map.width * _tileSize;
-    mapHeight = homeMap.tileMap.map.height * _tileSize;
-
-    await add(_george);
-    camera.followComponent(_george, worldBounds: worldBounds);
   }
 }

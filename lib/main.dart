@@ -14,7 +14,7 @@ void main() async {
         body: GameWidget(
           game: SerenetyVillageGame(),
           overlayBuilderMap: {
-            kOverlayController: (BuildContext context, SerenetyVillageGame game) {
+            kOverlayController: (BuildContext _, SerenetyVillageGame game) {
               return SceneControllerWidget(
                 game: game,
               );

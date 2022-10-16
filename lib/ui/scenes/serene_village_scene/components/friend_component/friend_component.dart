@@ -30,12 +30,6 @@ class FriendComponent extends PositionComponent
         message = '$name: Can you find a pie?';
       }
       gameRef.showMessage(message);
-
-      final bool isLevelFinished = gameRef.stateController.isMaxFriensNumberReached;
-      if (isLevelFinished) {
-        gameRef.sceneNumber++;
-        gameRef.newScene();
-      }
       gameRef.refreshWidget();
     }
     super.onCollisionStart(intersectionPoints, other);
