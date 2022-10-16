@@ -1,6 +1,6 @@
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
-import 'package:flame/input.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +10,7 @@ import '../../../../core_ui/movement_direction.dart';
 import '../../../../core_ui/screen.dart';
 import '../components/beach_component/beach_component.dart';
 import '../components/beach_component/load_beach_components.dart';
+import '../components/cat_component/cat_component.dart';
 import '../components/food_component/load_food_components.dart';
 import '../components/friend_component/load_friend_components.dart';
 import '../components/george_component/george_component.dart';
@@ -23,7 +24,7 @@ import '../tiled_maps/serene_village_tiled_map/serene_village_tiled_map.dart';
 
 const String kOverlayController = 'ButtonController';
 
-class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetection {
+class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappables {
   final SerenetyVillageStateController stateController = SerenetyVillageStateController();
   final SerenetyVillageAudioController audioController = SerenetyVillageAudioController();
 
@@ -38,10 +39,11 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
 
   late final Rect worldBounds;
 
-  final Vector2 _georgeInitialPosition = Vector2(250, 540);
+  final Vector2 _georgeInitialPosition = Vector2(444, 444);
   final Vector2 _ningaBoyInitialPosition = Vector2(700, 440);
   final Vector2 _leaf1InitialPosition = Vector2(510, 390);
   final Vector2 _leaf2InitialPosition = Vector2(760, 620);
+  final Vector2 _catInitialPosition = Vector2(1020, 544);
 
   late final Rect centralBeachSelection;
 
@@ -49,6 +51,17 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
     dialogMessage = message;
     isShowDialog = true;
     refreshWidget();
+  }
+
+  @override
+  void onTapDown(int pointerId, TapDownInfo info) {
+    const int maxDirections = 4;
+    if (georgeDirection >= maxDirections) {
+      georgeDirection = kDirectionIdleIndex;
+    } else {
+      georgeDirection++;
+    }
+    super.onTapDown(pointerId, info);
   }
 
   @override
@@ -90,24 +103,16 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
     final NinjaBoyComponent ninjaBoy = NinjaBoyComponent()..position = _ningaBoyInitialPosition;
     final Leaf1Component leaf1 = Leaf1Component()..position = _leaf1InitialPosition;
     final Leaf2Component leaf2 = Leaf2Component()..position = _leaf2InitialPosition;
+    final CatComponent cat = CatComponent()..position = _catInitialPosition;
     await add(ninjaBoy);
     await add(george);
     await add(leaf1);
     await add(leaf2);
+    await add(cat);
     overlays.add(kOverlayController);
 
     worldBounds = Rect.fromLTRB(kStartXPosition, kStartYPosition, mapSize.width, mapSize.height);
     camera.followComponent(george, worldBounds: worldBounds);
     await super.onLoad();
-  }
-
-  @override
-  void onTapUp(TapUpInfo info) {
-    const int maxDirections = 4;
-    if (georgeDirection >= maxDirections) {
-      georgeDirection = kDirectionIdleIndex;
-    } else {
-      georgeDirection++;
-    }
   }
 }
