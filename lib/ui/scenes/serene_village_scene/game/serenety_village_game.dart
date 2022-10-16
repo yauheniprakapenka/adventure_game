@@ -28,7 +28,7 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
 
   late GeorgeComponent _george;
   static const double _tileSize = SereneVillageTiledMap.tileSize;
-  int georgeDirection = kIdleIndex;
+  int georgeDirection = kDirectionIdleIndex;
   int collisionDirection = kNoCollision;
   late double mapWidth;
   late double mapHeight;
