@@ -45,6 +45,7 @@ class GeorgeComponent extends SpriteAnimationComponent
   @override
   void update(double dt) {
     _updateMovement();
+    // print(angle);
     super.update(dt);
   }
 
@@ -52,7 +53,7 @@ class GeorgeComponent extends SpriteAnimationComponent
     animation = _idleAnimation;
     switch (gameRef.georgeDirection) {
       case kDirectionDownIndex:
-        if (y < gameRef.mapHeight - height) {
+        if (y < gameRef.mapSize.height - height) {
           if (gameRef.collisionDirection != kDirectionDownIndex) {
             y += _speed;
             animation = _goDownAnimation;
@@ -77,7 +78,7 @@ class GeorgeComponent extends SpriteAnimationComponent
         }
         break;
       case kDirectionRightIndex:
-        if (x < gameRef.mapWidth - width) {
+        if (x < gameRef.mapSize.width - width) {
           if (gameRef.collisionDirection != kDirectionRightIndex) {
             animation = _goRightAnimation;
             x += _speed;

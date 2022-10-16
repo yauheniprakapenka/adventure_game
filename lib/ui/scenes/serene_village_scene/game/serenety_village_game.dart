@@ -13,6 +13,8 @@ import '../components/beach_component/load_beach_components.dart';
 import '../components/food_component/load_food_components.dart';
 import '../components/friend_component/load_friend_components.dart';
 import '../components/george_component/george_component.dart';
+import '../components/leaf_component/leaf1_component.dart';
+import '../components/leaf_component/leaf2_component.dart';
 import '../components/ninja_boy/ninja_boy_component.dart';
 import '../components/obstacle_component/load_obstacle_components.dart';
 import '../controllers/serenety_village_audio_controller.dart';
@@ -25,12 +27,10 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
   final SerenetyVillageStateController stateController = SerenetyVillageStateController();
   final SerenetyVillageAudioController audioController = SerenetyVillageAudioController();
 
-  late GeorgeComponent _george;
   static const double _tileSize = SereneVillageTiledMap.tileSize;
   int georgeDirection = kDirectionIdleIndex;
   int collisionDirection = kNoCollision;
-  late double mapWidth;
-  late double mapHeight;
+  late final Size mapSize;
   bool isShowDialog = true;
   String dialogMessage = 'My first message';
   late TiledComponent homeMap;
@@ -38,8 +38,10 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
 
   late final Rect worldBounds;
 
-  final Vector2 _georgeStartPosition = Vector2(250, 540);
-  final Vector2 _ningaBoyStartPosition = Vector2(700, 440);
+  final Vector2 _georgeInitialPosition = Vector2(250, 540);
+  final Vector2 _ningaBoyInitialPosition = Vector2(700, 440);
+  final Vector2 _leaf1InitialPosition = Vector2(510, 390);
+  final Vector2 _leaf2InitialPosition = Vector2(760, 620);
 
   late final Rect centralBeachSelection;
 
@@ -61,11 +63,9 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
     );
 
     final TiledMap tiledMap = homeMap.tileMap.map;
-    mapWidth = tiledMap.width * _tileSize;
-    mapHeight = tiledMap.height * _tileSize;
-    worldBounds = Rect.fromLTRB(kStartXPosition, kStartYPosition, mapWidth, mapHeight);
-
+    mapSize = Size(tiledMap.width * _tileSize, tiledMap.height * _tileSize);
     await add(homeMap);
+
     await loadFoodComponents(homeMap, this);
     await loadFriendComponents(homeMap, this);
     await loadObstacleComponents(homeMap: homeMap, game: this);
@@ -87,13 +87,18 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
       await add(component);
     });
 
-    final NinjaBoyComponent ninjaBoy = NinjaBoyComponent()..position = _ningaBoyStartPosition;
+    final GeorgeComponent george = GeorgeComponent()..position = _georgeInitialPosition;
+    final NinjaBoyComponent ninjaBoy = NinjaBoyComponent()..position = _ningaBoyInitialPosition;
+    final Leaf1Component leaf1 = Leaf1Component()..position = _leaf1InitialPosition;
+    final Leaf2Component leaf2 = Leaf2Component()..position = _leaf2InitialPosition;
     await add(ninjaBoy);
-    _george = GeorgeComponent()..position = _georgeStartPosition;
-    await add(_george);
-
-    camera.followComponent(_george, worldBounds: worldBounds);
+    await add(george);
+    await add(leaf1);
+    await add(leaf2);
     overlays.add(kOverlayController);
+
+    worldBounds = Rect.fromLTRB(kStartXPosition, kStartYPosition, mapSize.width, mapSize.height);
+    camera.followComponent(george, worldBounds: worldBounds);
     await super.onLoad();
   }
 
