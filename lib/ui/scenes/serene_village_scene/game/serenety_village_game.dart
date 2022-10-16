@@ -33,7 +33,7 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
   late final Size mapSize;
   bool isShowDialog = true;
   String dialogMessage = 'My first message';
-  late TiledComponent homeMap;
+
   List<Component> components = [];
 
   late final Rect worldBounds;
@@ -57,20 +57,19 @@ class SerenetyVillageGame extends FlameGame with TapDetector, HasCollisionDetect
     await audioController.playBackground();
     await audioController.pauseBackground();
 
-    homeMap = await TiledComponent.load(
+    final TiledComponent sereneVillageMap = await TiledComponent.load(
       SereneVillageTiledMap.sereneVillageTiledMapPath,
       Vector2.all(_tileSize),
     );
-
-    final TiledMap tiledMap = homeMap.tileMap.map;
+    final TiledMap tiledMap = sereneVillageMap.tileMap.map;
     mapSize = Size(tiledMap.width * _tileSize, tiledMap.height * _tileSize);
-    await add(homeMap);
+    await add(sereneVillageMap);
 
-    await loadFoodComponents(homeMap, this);
-    await loadFriendComponents(homeMap, this);
-    await loadObstacleComponents(homeMap: homeMap, game: this);
+    await loadFoodComponents(sereneVillageMap, this);
+    await loadFriendComponents(sereneVillageMap, this);
+    await loadObstacleComponents(homeMap: sereneVillageMap, game: this);
 
-    final List<BeachComponent> beachComponents = await loadBeachComponents(homeMap: homeMap);
+    final List<BeachComponent> beachComponents = await loadBeachComponents(map: sereneVillageMap);
     beachComponents.forEach((BeachComponent component) async {
       if (component.objectName == SereneVillageTiledMap.centralBeachSelection) {
         centralBeachSelection = Rect.fromLTWH(

@@ -5,9 +5,9 @@ import 'package:tiled/tiled.dart';
 import '../../tiled_maps/serene_village_tiled_map/serene_village_tiled_map.dart';
 import 'beach_component.dart';
 
-Future<List<BeachComponent>> loadBeachComponents({required TiledComponent homeMap}) async {
+Future<List<BeachComponent>> loadBeachComponents({required TiledComponent map}) async {
   final ObjectGroup? objectGroup =
-      homeMap.tileMap.getLayer<ObjectGroup>(SereneVillageTiledMap.beachGroupName);
+      map.tileMap.getLayer<ObjectGroup>(SereneVillageTiledMap.beachGroupName);
   final List<BeachComponent> components = [];
   if (objectGroup != null) {
     for (final TiledObject tiledObject in objectGroup.objects) {
