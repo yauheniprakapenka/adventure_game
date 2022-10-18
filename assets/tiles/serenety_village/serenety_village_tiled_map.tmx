@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="88" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="29">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="88" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="38">
  <tileset firstgid="1" name="choko_pie" tilewidth="16" tileheight="15" tilecount="1" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -28,13 +28,17 @@
   <object id="28" name="central_beach" class="central_beach_selection" x="583.924" y="401.298" width="206.656" height="142.977"/>
  </objectgroup>
  <objectgroup id="3" name="foods">
-  <object id="8" class="apple_pie_selection" x="1151.93" y="95.2569" width="15.74" height="16.32"/>
+  <object id="8" class="apple_pie_selection" x="695.904" y="518.71" width="15.74" height="16.32"/>
   <object id="11" class="choko_pie_selection" x="349.743" y="525.727" width="15.74" height="16.32"/>
   <object id="13" class="choko_pie_image" gid="1" x="351.184" y="541.673" width="16" height="15"/>
-  <object id="15" class="apple_pie_image" gid="2" x="1152.2" y="112.082" width="16" height="15"/>
+  <object id="15" class="apple_pie_image" gid="2" x="696.174" y="534.328" width="16" height="15"/>
  </objectgroup>
  <objectgroup id="5" name="obstacles">
   <object id="16" class="obstacle_selection" x="416.166" y="352.517" width="126.853" height="78.7822"/>
   <object id="23" class="obstacle_selection" x="421.19" y="497.178" width="119.409" height="157.042"/>
+  <object id="29" class="obstacle_selection" x="542.888" y="542.888" width="413.801" height="91.6878"/>
+  <object id="33" class="obstacle_selection" x="840.873" y="395.705" width="114.61" height="147.183"/>
+  <object id="36" class="obstacle_selection" x="542.888" y="484.98" width="41.0182" height="57.9081"/>
+  <object id="37" class="obstacle_selection" x="792.617" y="486.187" width="48.2567" height="55.4952"/>
  </objectgroup>
 </map>

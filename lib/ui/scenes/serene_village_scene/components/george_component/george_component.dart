@@ -2,18 +2,18 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 
-import '../../../../../core_ui/movement_direction.dart';
+import '../../../../../core_ui/movement_state.dart';
 import '../../../../../core_ui/screen.dart';
 import '../../game/serenety_village_game.dart';
 import 'george_sprite_sheet.dart';
 
 class GeorgeComponent extends SpriteAnimationComponent
     with GestureHitboxes, CollisionCallbacks, HasGameRef<SerenetyVillageGame> {
-  late final SpriteAnimation _goDownAnimation;
-  late final SpriteAnimation _goLeftAnimation;
-  late final SpriteAnimation _goRightAnimation;
-  late final SpriteAnimation _goUpAnimation;
-  late final SpriteAnimation _idleAnimation;
+  late final SpriteAnimation _walkDown;
+  late final SpriteAnimation _walkLeft;
+  late final SpriteAnimation _walkRight;
+  late final SpriteAnimation _walkUp;
+  late final SpriteAnimation _idle;
 
   static const double _speed = 2.5;
   static const double _stepTime = 0.2;
@@ -35,7 +35,7 @@ class GeorgeComponent extends SpriteAnimationComponent
   @override
   Future<void> onLoad() async {
     await _createAnimation();
-    animation = _idleAnimation;
+    animation = _idle;
     size = _componentSize;
     anchor = Anchor.center;
     debugMode = true;
@@ -50,37 +50,37 @@ class GeorgeComponent extends SpriteAnimationComponent
   }
 
   void _updateMovement() {
-    animation = _idleAnimation;
-    switch (gameRef.georgeDirection) {
-      case kDirectionDownIndex:
+    animation = _idle;
+    switch (gameRef.georgeMovementState) {
+      case kWalkDown:
         if (y < gameRef.mapSize.height - height) {
-          if (gameRef.collisionDirection != kDirectionDownIndex) {
+          if (gameRef.collisionDirection != kWalkDown) {
             y += _speed;
-            animation = _goDownAnimation;
+            animation = _walkDown;
           }
         }
         break;
-      case kDirectionLeftIndex:
+      case kWalkLeft:
         final bool notReachedLeftScreenEdge = x > kStartXPosition;
         if (notReachedLeftScreenEdge) {
-          if (gameRef.collisionDirection != kDirectionLeftIndex) {
-            animation = _goLeftAnimation;
+          if (gameRef.collisionDirection != kWalkLeft) {
+            animation = _walkLeft;
             x -= _speed;
           }
         }
         break;
-      case kDirectionUpIndex:
+      case kWalkUp:
         if (y > kStartYPosition) {
-          if (gameRef.collisionDirection != kDirectionUpIndex) {
-            animation = _goUpAnimation;
+          if (gameRef.collisionDirection != kWalkUp) {
+            animation = _walkUp;
             y -= _speed;
           }
         }
         break;
-      case kDirectionRightIndex:
+      case kWalkRight:
         if (x < gameRef.mapSize.width - width) {
-          if (gameRef.collisionDirection != kDirectionRightIndex) {
-            animation = _goRightAnimation;
+          if (gameRef.collisionDirection != kWalkRight) {
+            animation = _walkRight;
             x += _speed;
           }
         }
@@ -94,31 +94,31 @@ class GeorgeComponent extends SpriteAnimationComponent
       srcSize: Vector2.all(GeorgeSpriteSheet.spriteSize),
     );
 
-    _goDownAnimation = spriteSheet.createAnimation(
+    _walkDown = spriteSheet.createAnimation(
       row: GeorgeSpriteSheet.goDownAnimationRowIndex,
       stepTime: _stepTime,
       to: GeorgeSpriteSheet.spritesInRow,
     );
 
-    _goLeftAnimation = spriteSheet.createAnimation(
+    _walkLeft = spriteSheet.createAnimation(
       row: GeorgeSpriteSheet.goLeftAnimationRowIndex,
       stepTime: _stepTime,
       to: GeorgeSpriteSheet.spritesInRow,
     );
 
-    _goUpAnimation = spriteSheet.createAnimation(
+    _walkUp = spriteSheet.createAnimation(
       row: GeorgeSpriteSheet.goUpAnimationRowIndex,
       stepTime: _stepTime,
       to: GeorgeSpriteSheet.spritesInRow,
     );
 
-    _goRightAnimation = spriteSheet.createAnimation(
+    _walkRight = spriteSheet.createAnimation(
       row: GeorgeSpriteSheet.goRightAnimationRowIndex,
       stepTime: _stepTime,
       to: GeorgeSpriteSheet.spritesInRow,
     );
 
-    _idleAnimation = spriteSheet.createAnimation(
+    _idle = spriteSheet.createAnimation(
       row: GeorgeSpriteSheet.goDownAnimationRowIndex,
       stepTime: _stepTime,
       to: _desiredNumberOfSpritesInRowForIdleAnimation,

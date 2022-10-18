@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core_ui/design/app_sizes.dart';
 import '../design/serenety_village_colors.dart';
 import '../game/serenety_village_game.dart';
 
@@ -15,24 +16,20 @@ class AudioButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isBackgroundPlaying = game.audioController.isBackgroundPlaying();
     return Container(
-      padding: const EdgeInsets.all(8),
       color: SerenetyVillageColors.overlayBackground,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            onPressed: () {
-              isBackgroundPlaying
-                  ? game.audioController.pauseBackground()
-                  : game.audioController.resumeBackground();
-              game.refreshWidget();
-            },
-            icon: Icon(
-              isBackgroundPlaying ? Icons.pause : Icons.play_arrow,
-              color: Colors.white,
-            ),
-          ),
-        ],
+      child: IconButton(
+        iconSize: AppSizes.icon,
+        constraints: const BoxConstraints(),
+        onPressed: () {
+          isBackgroundPlaying
+              ? game.audioController.pauseBackground()
+              : game.audioController.resumeBackground();
+          game.refreshWidget();
+        },
+        icon: Icon(
+          isBackgroundPlaying ? Icons.pause : Icons.play_arrow,
+          color: Colors.white,
+        ),
       ),
     );
   }

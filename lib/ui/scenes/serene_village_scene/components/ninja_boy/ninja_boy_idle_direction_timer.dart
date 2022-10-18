@@ -2,14 +2,18 @@ import 'dart:async';
 
 class NinjaBoyIdleDirectionTimer {
   late Timer _timer;
+  
   static const int _initialCouterValue = 0;
+  static const int _maxCount = 2;
 
   int _count = _initialCouterValue;
-  final int _maxCount = 3;
+  bool _isInitialized = false;
 
   bool get isFinished => _count >= _maxCount;
+  bool get isInitialezed => _isInitialized;
 
   void start() {
+    _isInitialized = true;
     _timer = Timer.periodic(
       const Duration(seconds: 1),
       (Timer timer) {
@@ -19,7 +23,16 @@ class NinjaBoyIdleDirectionTimer {
   }
 
   void stop() {
-    _timer.cancel();
-    _count = _initialCouterValue;
+    if (isInitialezed) {
+      _isInitialized = false;
+      _timer.cancel();
+    }
+  }
+
+  void reset() {
+    if (isInitialezed) {
+      stop();
+      _count = _initialCouterValue;
+    }
   }
 }

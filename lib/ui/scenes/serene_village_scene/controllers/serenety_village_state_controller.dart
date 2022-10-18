@@ -13,4 +13,10 @@ class SerenetyVillageStateController {
   bool get isMaxFriensNumberReached {
     return _friendsCounter >= _maxFriends;
   }
+
+  bool _hasGrape = false;
+  bool get hasGrape => _hasGrape;
+  void addGrape() {
+    _hasGrape = true;
+  }
 }
