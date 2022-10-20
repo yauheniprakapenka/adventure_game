@@ -9,24 +9,26 @@ import '../../../../core_ui/movement_state.dart';
 import '../../../../core_ui/screen.dart';
 import '../components/beach_component/beach_component.dart';
 import '../components/beach_component/load_beach_components.dart';
+import '../components/bear_component/bear_component.dart';
 import '../components/cat_component/cat_component.dart';
 import '../components/food_component/load_food_components.dart';
 import '../components/friend_component/load_friend_components.dart';
 import '../components/george_component/george_component.dart';
-import '../components/grape_component/grape_component.dart';
 import '../components/leaf_component/leaf1_component.dart';
 import '../components/leaf_component/leaf2_component.dart';
 import '../components/ninja_boy/ninja_boy_component.dart';
 import '../components/obstacle_component/load_obstacle_components.dart';
-import '../controllers/serenety_village_audio_controller.dart';
-import '../controllers/serenety_village_state_controller.dart';
+import '../controllers/audio_controller.dart';
+import '../controllers/quest_controller.dart';
+import '../controllers/state_controller.dart';
 import '../tiled_maps/serene_village_tiled_map/serene_village_tiled_map.dart';
 
 const String kOverlayController = 'ButtonController';
 
 class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappables {
-  final SerenetyVillageStateController stateController = SerenetyVillageStateController();
-  final SerenetyVillageAudioController audioController = SerenetyVillageAudioController();
+  final StateController stateController = StateController();
+  final AudioController audioController = AudioController();
+  final QuestController questController = QuestController();
 
   static const double _tileSize = SereneVillageTiledMap.tileSize;
 
@@ -43,7 +45,7 @@ class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappa
 
   late final NinjaBoyComponent ninjaBoy;
 
-  final Vector2 _georgeInitialPosition = Vector2(600, 250);
+  final Vector2 _georgeInitialPosition = Vector2(400, 250);
   final Vector2 _ningaBoyInitialPosition = Vector2(700, 440);
   final Vector2 _poisonPieInitialPosition = Vector2(700, 240);
   final Vector2 _leaf1InitialPosition = Vector2(510, 390);
@@ -109,8 +111,8 @@ class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappa
     final Leaf1Component leaf1 = Leaf1Component()..position = _leaf1InitialPosition;
     final Leaf2Component leaf2 = Leaf2Component()..position = _leaf2InitialPosition;
     final CatComponent cat = CatComponent()..position = _catInitialPosition;
-    final GrapeComponent grape = GrapeComponent()..position = _poisonPieInitialPosition;
-   
+    final BearComponent grape = BearComponent()..position = _poisonPieInitialPosition;
+
     await add(ninjaBoy);
     await add(george);
     await add(leaf1);

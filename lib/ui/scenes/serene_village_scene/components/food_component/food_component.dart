@@ -19,6 +19,7 @@ class FoodComponent extends SpriteComponent
   @override
   Future<void> onLoad() async {
     anchor = Anchor.center;
+    debugMode = true;
     await super.onLoad();
   }
 

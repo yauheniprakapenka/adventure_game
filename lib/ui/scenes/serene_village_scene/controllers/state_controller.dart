@@ -1,4 +1,4 @@
-class SerenetyVillageStateController {
+class StateController {
   int _piesCounter = 0;
   int get piesCount => _piesCounter;
   void increasePies() => _piesCounter++;
@@ -14,9 +14,7 @@ class SerenetyVillageStateController {
     return _friendsCounter >= _maxFriends;
   }
 
-  bool _hasGrape = false;
-  bool get hasGrape => _hasGrape;
-  void addGrape() {
-    _hasGrape = true;
-  }
+  bool _hasBearToy = false;
+  bool get hasBearToy => _hasBearToy;
+  void setBearToy() => _hasBearToy = true;
 }

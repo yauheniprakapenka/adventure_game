@@ -12,19 +12,16 @@ class QuestWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String? imagePath = taskModel.imagePath;
     return Container(
       padding: const EdgeInsets.all(8),
       color: SerenetyVillageColors.overlayBackground,
       child: Row(
         children: [
-          Image.asset(taskModel.imagePath, width: AppSizes.icon),
+          imagePath == null ? const SizedBox() : Image.asset(imagePath, width: AppSizes.icon),
           const SizedBox(width: 6),
           Text(taskModel.task, style: AppTextStyle.h3),
           const SizedBox(width: 6),
-          Icon(
-            taskModel.isCompleted ? Icons.check_box_outlined : Icons.check_box_outline_blank,
-            color: Colors.white,
-          ),
         ],
       ),
     );

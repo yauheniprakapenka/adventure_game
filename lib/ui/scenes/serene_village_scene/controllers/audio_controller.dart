@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flame_audio/audio_pool.dart';
 import 'package:flame_audio/flame_audio.dart';
 
-class SerenetyVillageAudioController {
+class AudioController {
   static const String _background = 'betterdays.mp3';
   static const String _pickUpItem = 'audio/click2.mp3';
 
@@ -23,7 +23,7 @@ class SerenetyVillageAudioController {
     await FlameAudio.bgm.pause();
   }
 
-  Future<void>  resumeBackground() async {
+  Future<void> resumeBackground() async {
     await FlameAudio.bgm.resume();
   }
 

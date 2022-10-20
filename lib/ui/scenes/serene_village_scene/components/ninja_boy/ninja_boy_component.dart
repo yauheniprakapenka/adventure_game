@@ -6,6 +6,7 @@ import 'package:flame/sprite.dart';
 
 import '../../../../../core_ui/movement_state.dart';
 import '../../game/serenety_village_game.dart';
+import '../../models/quest_model.dart';
 import '../george_component/george_component.dart';
 import 'ninja_boy_idle_direction_timer.dart';
 import 'ninja_boy_sprite_sheet.dart';
@@ -47,7 +48,16 @@ class NinjaBoyComponent extends SpriteAnimationComponent
   @override
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is GeorgeComponent) {
-      gameRef.showMessage('I will catch you!');
+      if (gameRef.stateController.hasBearToy &&
+          gameRef.questController.getCurrentQuest.questType == QuestType.returnBearToyToNinjaBoy) {
+        gameRef.showMessage('You find my bear toy! Thank you');
+        gameRef.questController.completeCurrentQuest();
+        animation = _deadAnimation;
+        _movementState = kDead;
+        _idleMovementStateTimer.stop();
+      } else {
+        gameRef.showMessage('Can you help me to find my bear toy');
+      }
     }
     super.onCollisionStart(intersectionPoints, other);
   }
@@ -55,11 +65,14 @@ class NinjaBoyComponent extends SpriteAnimationComponent
   @override
   void update(double dt) {
     _updateMovement();
-    if (gameRef.stateController.hasGrape) {
-      animation = _deadAnimation;
-      _movementState = kDead;
-      _idleMovementStateTimer.stop();
-    }
+    // if (gameRef.questController.getCurrentQuest.questType == QuestType.returnBearToyToNinjaBoy) {
+    //   if (gameRef.stateController.hasBearToy) {
+    //     animation = _deadAnimation;
+    //     _movementState = kDead;
+    //     _idleMovementStateTimer.stop();
+    //   }
+    // }
+
     super.update(dt);
   }
 

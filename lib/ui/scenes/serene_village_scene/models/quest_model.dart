@@ -1,11 +1,21 @@
 class QuestModel {
   final String task;
-  final bool isCompleted;
-  final String imagePath;
+  final QuestType questType;
+  final String? imagePath;
 
   const QuestModel({
     required this.task,
-    required this.isCompleted,
-    required this.imagePath,
+    this.imagePath,
+    required this.questType,
   });
+
+  factory QuestModel.finished() {
+    return const QuestModel(task: '', questType: QuestType.finished);
+  }
+}
+
+enum QuestType {
+  finished,
+  findBearToy,
+  returnBearToyToNinjaBoy,
 }
