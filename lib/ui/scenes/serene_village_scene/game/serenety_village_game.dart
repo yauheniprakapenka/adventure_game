@@ -55,9 +55,9 @@ class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappa
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-    if (stateController.piesCount > 0) {
-      remove(ninjaBoy);
-    }
+    // if (stateController.piesCount > 0) {
+    //   remove(ninjaBoy);
+    // }
   }
 
   @override
