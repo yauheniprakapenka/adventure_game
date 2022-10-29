@@ -11,6 +11,7 @@ import '../components/beach_component/beach_component.dart';
 import '../components/beach_component/load_beach_components.dart';
 import '../components/bear_component/bear_component.dart';
 import '../components/cat_component/cat_component.dart';
+import '../components/dialog_component/dialog_component.dart';
 import '../components/food_component/load_food_components.dart';
 import '../components/friend_component/load_friend_components.dart';
 import '../components/george_component/george_component.dart';
@@ -51,14 +52,6 @@ class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappa
   final Vector2 _leaf1InitialPosition = Vector2(510, 390);
   final Vector2 _leaf2InitialPosition = Vector2(760, 620);
   final Vector2 _catInitialPosition = Vector2(1020, 544);
-
-  @override
-  void render(Canvas canvas) {
-    super.render(canvas);
-    // if (stateController.piesCount > 0) {
-    //   remove(ninjaBoy);
-    // }
-  }
 
   @override
   void onTapDown(int pointerId, TapDownInfo info) {
@@ -123,6 +116,7 @@ class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappa
 
     worldBounds = Rect.fromLTRB(kStartXPosition, kStartYPosition, mapSize.width, mapSize.height);
     camera.followComponent(george, worldBounds: worldBounds);
+
     await super.onLoad();
   }
 
@@ -131,4 +125,11 @@ class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappa
     isShowDialog = true;
     refreshWidget();
   }
+
+  Future<void> showOtherMessage(String message, Vector2 position) async {
+    final DialogComponent _dialogComponent = DialogComponent(text: message, position: position)
+      ..position =position;
+    await add(_dialogComponent);
+  }
+
 }

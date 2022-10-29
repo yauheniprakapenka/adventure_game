@@ -48,6 +48,7 @@ class NinjaBoyComponent extends SpriteAnimationComponent
   @override
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is GeorgeComponent) {
+      gameRef.showOtherMessage('Уходи', position);
       if (gameRef.stateController.hasBearToy &&
           gameRef.questController.getCurrentQuest.questType == QuestType.returnBearToyToNinjaBoy) {
         gameRef.showMessage('You find my bear toy! Thank you');
