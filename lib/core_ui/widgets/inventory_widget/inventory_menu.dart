@@ -12,7 +12,7 @@ class InventoryMenu extends StatelessWidget {
       height: 200,
       color: Colors.black.withOpacity(0.8),
       child: Column(
-        children: [
+        children: const [
           Text(
             'Инвентарь',
             style: TextStyle(color: Colors.white),

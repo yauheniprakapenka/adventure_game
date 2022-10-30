@@ -45,7 +45,6 @@ class GeorgeComponent extends SpriteAnimationComponent
   @override
   void update(double dt) {
     _updateMovement();
-    // print(angle);
     super.update(dt);
   }
 

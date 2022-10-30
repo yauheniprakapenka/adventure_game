@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:flame/events.dart';
+
 import 'package:flame/game.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +15,7 @@ import '../components/dialog_component/dialog_component.dart';
 import '../components/food_component/load_food_components.dart';
 import '../components/friend_component/load_friend_components.dart';
 import '../components/george_component/george_component.dart';
+import '../components/joystick_button_component.dart/joystick_button_component.dart';
 import '../components/leaf_component/leaf1_component.dart';
 import '../components/leaf_component/leaf2_component.dart';
 import '../components/ninja_boy/ninja_boy_component.dart';
@@ -26,7 +27,8 @@ import '../tiled_maps/serene_village_tiled_map/serene_village_tiled_map.dart';
 
 const String kOverlayController = 'ButtonController';
 
-class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappables {
+class SerenetyVillageGame extends FlameGame
+    with HasCollisionDetection, HasTappables, HasDraggables {
   final StateController stateController = StateController();
   final AudioController audioController = AudioController();
   final QuestController questController = QuestController();
@@ -40,6 +42,10 @@ class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappa
 
   List<Component> components = [];
 
+  void changeGeorgeDirection(int state) {
+    georgeMovementState = state;
+  }
+
   late final Size mapSize;
   late final Rect worldBounds;
   late final Rect centralBeachSelection;
@@ -52,17 +58,6 @@ class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappa
   final Vector2 _leaf1InitialPosition = Vector2(510, 390);
   final Vector2 _leaf2InitialPosition = Vector2(760, 620);
   final Vector2 _catInitialPosition = Vector2(1020, 544);
-
-  @override
-  void onTapDown(int pointerId, TapDownInfo info) {
-    const int maxDirections = 4;
-    if (georgeMovementState >= maxDirections) {
-      georgeMovementState = kIdle;
-    } else {
-      georgeMovementState++;
-    }
-    super.onTapDown(pointerId, info);
-  }
 
   @override
   Future<void> onLoad() async {
@@ -117,6 +112,8 @@ class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappa
     worldBounds = Rect.fromLTRB(kStartXPosition, kStartYPosition, mapSize.width, mapSize.height);
     camera.followComponent(george, worldBounds: worldBounds);
 
+    await _initAppJoystick();
+
     await super.onLoad();
   }
 
@@ -127,9 +124,61 @@ class SerenetyVillageGame extends FlameGame with HasCollisionDetection, HasTappa
   }
 
   Future<void> showOtherMessage(String message, Vector2 position) async {
-    final DialogComponent _dialogComponent = DialogComponent(text: message, position: position)
-      ..position =position;
-    await add(_dialogComponent);
+    final DialogComponent dialogComponent = DialogComponent(text: message, position: position)
+      ..position = position;
+    await add(dialogComponent);
   }
 
+  Future<void> _initAppJoystick() async {
+    await add(
+      JoystickButtonComponent(
+        margin: const EdgeInsets.only(left: 120, bottom: 120),
+        sprite: await Sprite.load('buttons/up.png'),
+        onPressed: () {
+          georgeMovementState = kWalkUp;
+        },
+        onReleased: () {
+          georgeMovementState = kIdle;
+        },
+      ),
+    );
+
+    await add(
+      JoystickButtonComponent(
+        margin: const EdgeInsets.only(left: 40, bottom: 40),
+        sprite: await Sprite.load('buttons/left.png'),
+        onPressed: () {
+          georgeMovementState = kWalkLeft;
+        },
+        onReleased: () {
+          georgeMovementState = kIdle;
+        },
+      ),
+    );
+    await add(
+      JoystickButtonComponent(
+        margin: const EdgeInsets.only(left: 120, bottom: 40),
+        sprite: await Sprite.load('buttons/down.png'),
+        onPressed: () {
+          georgeMovementState = kWalkDown;
+        },
+        onReleased: () {
+          georgeMovementState = kIdle;
+        },
+      ),
+    );
+
+    await add(
+      JoystickButtonComponent(
+        margin: const EdgeInsets.only(left: 200, bottom: 40),
+        sprite: await Sprite.load('buttons/right.png'),
+        onPressed: () {
+          georgeMovementState = kWalkRight;
+        },
+        onReleased: () {
+          georgeMovementState = kIdle;
+        },
+      ),
+    );
+  }
 }

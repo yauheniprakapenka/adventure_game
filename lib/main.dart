@@ -30,20 +30,17 @@ class HomeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
           GameWidget(
             game: SerenetyVillageGame(),
             overlayBuilderMap: {
               kOverlayController: (BuildContext _, SerenetyVillageGame game) {
-                return SceneControllerWidget(
-                  game: game,
-                );
+                return SceneControllerWidget(game: game);
               },
             },
           ),
-          const Positioned.fill(
-            child: InventoryWidget(),
-          ),
+          const InventoryWidget(),
         ],
       ),
     );

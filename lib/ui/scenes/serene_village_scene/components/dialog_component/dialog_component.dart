@@ -30,7 +30,7 @@ class DialogComponent extends TextBoxComponent {
   @override
   Future<void> onLoad() async {
     Duration duration =
-        Duration(milliseconds: (_timePerChar * 100).toInt() * text.length) + Duration(seconds: 1);
+        Duration(milliseconds: (_timePerChar * 100).toInt() * text.length) + const Duration(seconds: 1);
     Future.delayed(duration).then((value) {
       removeFromParent();
     });

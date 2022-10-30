@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'inventory_button.dart';
-import 'inventory_menu_widget.dart';
+import 'inventory_menu.dart';
 
 class InventoryWidget extends StatefulWidget {
   const InventoryWidget({super.key});
@@ -18,15 +18,16 @@ class _InventoryWidgetState extends State<InventoryWidget> {
     return Stack(
       children: [
         Positioned(
-            top: 80,
-            left: 12,
-            child: InventoryButton(
-              onPressed: () {
-                setState(() {
-                  _isInventoryVisible = !_isInventoryVisible;
-                });
-              },
-            )),
+          top: 80,
+          left: 12,
+          child: InventoryButton(
+            onPressed: () {
+              setState(() {
+                _isInventoryVisible = !_isInventoryVisible;
+              });
+            },
+          ),
+        ),
         _isInventoryVisible
             ? const Positioned.fill(
                 child: Center(

@@ -28,6 +28,7 @@ flutter:
   assets:
     - assets/images/
     - assets/audio/
+    - assets/images/buttons/
     - assets/tiles/
     - assets/tiles/serenety_village/
     - assets/images/sprite_sheets/
